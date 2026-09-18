@@ -10,6 +10,7 @@ fun translateWeather(weather: String): String {
         "mcloudy" -> "Mostly cloudy"
         "cloudy" -> "Cloudy"
         "lightrain" -> "Light rain"
+        "rain" -> "Raining"
         "oshower" -> "Occasional showers"
         "ishower" -> "Intermittent showers"
         "lightsnow" -> "Light snow"
@@ -36,8 +37,9 @@ fun getWeatherEmoji(weather: String): String {
         "snow" -> "❄️"
         "rainsnow" -> "🌨️"
         "ts" -> "⛈️"
+        "tsrain" -> "⛈️"
         "humid" -> "🌦️"
-        else -> "🌤️"
+        else -> "❌"
     }
 }
 
@@ -60,11 +62,3 @@ fun translateWind(wind: Int): String {
     }
 }
 
-fun translateDate(date: String): String {
-    val inputFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
-    val outputFormatter = DateTimeFormatter.ofPattern("d MMMM, yyyy")
-
-    val parsedDate = LocalDate.parse(date, inputFormatter)
-
-    return parsedDate.format(outputFormatter)
-}

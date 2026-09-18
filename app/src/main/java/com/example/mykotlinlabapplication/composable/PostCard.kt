@@ -1,5 +1,6 @@
 package com.example.mykotlinlabapplication.composable
 
+import android.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,10 +20,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mykotlinlabapplication.data.WeatherPost
 import com.example.mykotlinlabapplication.ui.theme.MyKotlinLabApplicationTheme
+import com.example.mykotlinlabapplication.util.getTodaysDate
 import com.example.mykotlinlabapplication.util.getWeatherEmoji
 import com.example.mykotlinlabapplication.util.translateDate
 import com.example.mykotlinlabapplication.util.translateWind
 import com.example.mykotlinlabapplication.util.translateWeather
+import java.time.LocalDateTime
 
 @Composable
 fun PostCard(weatherPost: WeatherPost) {
@@ -31,8 +34,9 @@ fun PostCard(weatherPost: WeatherPost) {
             .padding(16.dp)
             .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 6.dp
+            defaultElevation = 6.dp,
         )
+
     ) {
         Column(
             modifier = Modifier.padding(20.dp)
@@ -92,7 +96,7 @@ fun PostCard(weatherPost: WeatherPost) {
 
             HorizontalDivider()
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             //Row with wind information
             Row(
@@ -140,11 +144,11 @@ fun WeatherValue(
 @Composable
 fun PostCardPreview() {
     val weatherPost = WeatherPost(
-        date = "20260707",
-        weather = "cloudy",
+        date = getTodaysDate(),
+        weather = "ts",
         minTemp = 20,
-        maxTemp = 25,
-        wind = 2
+        maxTemp = 32,
+        wind = 12
     )
 
     MyKotlinLabApplicationTheme {
