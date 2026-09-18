@@ -14,6 +14,7 @@ fun translateWeather(weather: String): String {
         "rainsnow" -> "Rain and snow"
         "ts" -> "Thunderstorm"
         "tsrain" -> "Thunderstorm with rain"
+        "humid" -> "High humidity"
         else -> "Unknown weather"
     }
 }
