@@ -52,7 +52,7 @@ fun PostCard(weatherPost : WeatherPost) {
 fun PostCardPreview() {
     val weatherPost = WeatherPost(
         date = "20260707",
-        weather = "Cloudy",
+        weather = "cloudy",
         minTemp = 20,
         maxTemp = 25,
         wind = 2
