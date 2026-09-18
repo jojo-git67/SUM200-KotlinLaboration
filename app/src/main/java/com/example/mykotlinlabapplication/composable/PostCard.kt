@@ -1,6 +1,5 @@
 package com.example.mykotlinlabapplication.composable
 
-import android.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,7 +24,6 @@ import com.example.mykotlinlabapplication.util.getWeatherEmoji
 import com.example.mykotlinlabapplication.util.translateDate
 import com.example.mykotlinlabapplication.util.translateWind
 import com.example.mykotlinlabapplication.util.translateWeather
-import java.time.LocalDateTime
 
 @Composable
 fun PostCard(weatherPost: WeatherPost) {

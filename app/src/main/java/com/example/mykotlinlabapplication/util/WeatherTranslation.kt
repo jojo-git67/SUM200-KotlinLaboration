@@ -1,8 +1,5 @@
 package com.example.mykotlinlabapplication.util
 
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-
 fun translateWeather(weather: String): String {
     return when (weather) {
         "clear" -> "Clear sky"
