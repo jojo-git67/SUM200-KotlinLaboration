@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.example.mykotlinlabapplication.data.WeatherPost
 import com.example.mykotlinlabapplication.ui.theme.MyKotlinLabApplicationTheme
 import com.example.mykotlinlabapplication.util.getWeatherEmoji
+import com.example.mykotlinlabapplication.util.translateDate
 import com.example.mykotlinlabapplication.util.translateWind
 import com.example.mykotlinlabapplication.util.translateWeather
 
@@ -47,7 +48,7 @@ fun PostCard(weatherPost: WeatherPost) {
 
             Text(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                text = weatherPost.date,
+                text = translateDate(weatherPost.date),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
