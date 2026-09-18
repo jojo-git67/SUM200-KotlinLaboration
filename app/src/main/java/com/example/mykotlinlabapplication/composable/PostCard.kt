@@ -1,49 +1,137 @@
 package com.example.mykotlinlabapplication.composable
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mykotlinlabapplication.data.WeatherPost
 import com.example.mykotlinlabapplication.ui.theme.MyKotlinLabApplicationTheme
+import com.example.mykotlinlabapplication.util.getWeatherEmoji
 import com.example.mykotlinlabapplication.util.translateWind
 import com.example.mykotlinlabapplication.util.translateWeather
 
 @Composable
-fun PostCard(weatherPost : WeatherPost) {
-    Card(Modifier.padding(8.dp)) {
-        Column(Modifier.padding(all = 8.dp)) {
+fun PostCard(weatherPost: WeatherPost) {
+    Card(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 6.dp
+        )
+    ) {
+        Column(
+            modifier = Modifier.padding(20.dp)
+        ) {
+            //Header text
             Text(
-                text = "Today's date: " + weatherPost.date,
-                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                text = "Today's Weather",
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.primary
+
+            )
+
+            Text(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                text = weatherPost.date,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            //Current weather
+            //Emoji
+            Text(
+                text = getWeatherEmoji(weatherPost.weather),
+                style = MaterialTheme.typography.displayLarge,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+
+            //Emoji description
+            Text(
+                text = translateWeather(weatherPost.weather),
                 style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
             )
-            Text(
-                text = "Today's weather forecast: " + translateWeather(weatherPost.weather),
-                color = MaterialTheme.colorScheme.secondary,
-                style = MaterialTheme.typography.titleSmall
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(
-                text= "Today's minimum temperature: " + weatherPost.minTemp.toString(),
-                style = MaterialTheme.typography.bodyMedium
-            )
-            Text(
-                text= "Today's maximum temperature: " + weatherPost.maxTemp.toString(),
-                style = MaterialTheme.typography.bodyMedium
-            )
-            Text(
-                text="Today's wind speed: " + translateWind(weatherPost.wind),
-                style = MaterialTheme.typography.bodyMedium
-            )
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            //Row with min- and max-temperatures
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                WeatherValue(
+                    label = "Minimum",
+                    value = "${weatherPost.minTemp}°C"
+                )
+
+                WeatherValue(
+                    label = "Maximum",
+                    value = "${weatherPost.maxTemp}°C"
+                )
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            HorizontalDivider()
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            //Row with wind information
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "💨 Wind",
+                    style = MaterialTheme.typography.titleMedium
+                )
+
+                Text(
+                    text = translateWind(weatherPost.wind),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
         }
+    }
+}
+
+@Composable
+fun WeatherValue(
+    label: String,
+    value: String
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = value,
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
     }
 }
 
