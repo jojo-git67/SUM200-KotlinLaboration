@@ -1,5 +1,8 @@
 package com.example.mykotlinlabapplication.util
 
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
 fun translateWeather(weather: String): String {
     return when (weather) {
         "clear" -> "Clear sky"
@@ -55,4 +58,13 @@ fun translateWind(wind: Int): String {
         12 -> "Hurricane-force"
         else -> "Unknown"
     }
+}
+
+fun translateDate(date: String): String {
+    val inputFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+    val outputFormatter = DateTimeFormatter.ofPattern("d MMMM, yyyy")
+
+    val parsedDate = LocalDate.parse(date, inputFormatter)
+
+    return parsedDate.format(outputFormatter)
 }
