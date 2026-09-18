@@ -33,6 +33,7 @@ fun getWeatherEmoji(weather: String): String {
         "snow" -> "❄️"
         "rainsnow" -> "🌨️"
         "ts" -> "⛈️"
+        "humid" -> "🌦️"
         else -> "🌤️"
     }
 }
