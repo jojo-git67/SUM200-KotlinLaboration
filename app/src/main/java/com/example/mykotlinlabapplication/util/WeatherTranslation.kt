@@ -19,6 +19,24 @@ fun translateWeather(weather: String): String {
     }
 }
 
+fun getWeatherEmoji(weather: String): String {
+    return when (weather) {
+        "clear" -> "☀️"
+        "pcloudy" -> "🌤️"
+        "mcloudy" -> "⛅"
+        "cloudy" -> "☁️"
+        "lightrain" -> "🌦️"
+        "rain" -> "🌧️"
+        "oshower" -> "🌦️"
+        "ishower" -> "🌦️"
+        "lightsnow" -> "🌨️"
+        "snow" -> "❄️"
+        "rainsnow" -> "🌨️"
+        "ts" -> "⛈️"
+        else -> "🌤️"
+    }
+}
+
 fun translateWind(wind: Int): String {
     return when (wind) {
         0 -> "Calm"
