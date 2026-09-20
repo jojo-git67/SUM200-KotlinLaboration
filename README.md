@@ -74,7 +74,7 @@ The application can then be run using an Android emulator or a connected Android
 
 This project is primarily a learning exercise. It has been used to practice:
 
-- Kotlin syntax and data classes
+- Kotlin syntax
 - Jetpack Compose
 - Composable functions
 - Compose state
