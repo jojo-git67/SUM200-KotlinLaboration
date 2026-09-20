@@ -46,7 +46,11 @@ class MainActivity : ComponentActivity() {
 
             var selectedLocation by remember { mutableStateOf(locations[0]) }
 
-
+            /*
+            Using LaunchedEffect to only make a new api call when the selected location is updated
+            to avoid unnecessary api calls when UI is redrawn
+            https://developer.android.com/develop/ui/compose/side-effects
+            */
             LaunchedEffect(selectedLocation){
                 val url =
                     "https://www.7timer.info/bin/api.pl" +
@@ -94,6 +98,7 @@ class MainActivity : ComponentActivity() {
                 queue.add(request)
             }
 
+            //User interface
             MyKotlinLabApplicationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Column(
