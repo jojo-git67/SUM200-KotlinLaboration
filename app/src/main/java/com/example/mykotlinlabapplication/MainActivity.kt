@@ -86,9 +86,6 @@ class MainActivity : ComponentActivity() {
                             maxTemp,
                             wind)
 
-                        Log.e("API-String", url)
-                        Log.d("Weather", response.toString())
-
                     },
                     { error ->
                         Log.e("VolleyError", error.toString())
