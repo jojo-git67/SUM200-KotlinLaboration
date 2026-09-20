@@ -20,6 +20,10 @@ with the use of the [Volley](https://google.github.io/volley/) library.
 - *Volley* for http requests
 - *7Timer!* API for weather data
 
+The volley library has been added as a dependency in [build.gradle.kts](https://github.com/jojo-git67/SUM200-KotlinLaboration/blob/main/app/build.gradle.kts)
+
+Internet permission has been added to the [AndroidManifest.xml](https://github.com/jojo-git67/SUM200-KotlinLaboration/blob/main/app/src/main/AndroidManifest.xml)
+
 ## Predefined locations
 | Location    | Latitude | Longitude |
 |-------------|----------|-----------|
