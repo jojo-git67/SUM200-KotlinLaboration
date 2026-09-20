@@ -143,10 +143,10 @@ fun WeatherValue(
 fun PostCardPreview() {
     val weatherPost = WeatherPost(
         date = getTodaysDate(),
-        weather = "ts",
-        minTemp = 20,
-        maxTemp = 32,
-        wind = 12
+        weather = "unknown",
+        minTemp = 0,
+        maxTemp = 0,
+        wind = 0
     )
 
     MyKotlinLabApplicationTheme {

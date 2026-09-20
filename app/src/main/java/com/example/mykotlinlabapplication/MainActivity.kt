@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,11 +19,21 @@ import androidx.compose.ui.Modifier
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.mykotlinlabapplication.composable.LocationSelector
 import com.example.mykotlinlabapplication.composable.PostCard
+import com.example.mykotlinlabapplication.composable.PostCardPreview
+import com.example.mykotlinlabapplication.data.Location
 import com.example.mykotlinlabapplication.data.WeatherPost
 import com.example.mykotlinlabapplication.ui.theme.MyKotlinLabApplicationTheme
 
 class MainActivity : ComponentActivity() {
+    val locations = listOf(
+        Location("Trollhättan", 58.2837, 12.2886),
+        Location("Gothenburg", 57.7089, 11.9746),
+        Location("Stockholm", 59.3293, 18.0686),
+        Location("Malmö", 55.6050, 13.0038)
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,43 +43,55 @@ class MainActivity : ComponentActivity() {
         setContent {
             var post by remember { mutableStateOf<WeatherPost?>(null) }
 
-            val url =
-                "https://www.7timer.info/bin/api.pl?lon=58.28225&lat=12.29285&product=civillight&output=json"
+            var selectedLocation by remember { mutableStateOf(locations[0]) }
 
-            val request = JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                { response ->
 
-                    val dataseries = response.getJSONArray("dataseries")
+            LaunchedEffect(selectedLocation){
+                val url =
+                    "https://www.7timer.info/bin/api.pl" +
+                            "?lon=${selectedLocation.longitude}" +
+                            "&lat=${selectedLocation.latitude}" +
+                            "&product=civillight" +
+                            "&output=json"
 
-                    val today = dataseries.getJSONObject(0)
+                val request = JsonObjectRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    { response ->
 
-                    val date = today.getInt("date").toString()
-                    val weather = today.getString("weather")
+                        val dataseries = response.getJSONArray("dataseries")
 
-                    val temperatures = today.getJSONObject("temp2m")
+                        val today = dataseries.getJSONObject(0)
 
-                    val minTemp = temperatures.getInt("min")
-                    val maxTemp = temperatures.getInt("max")
+                        val date = today.getInt("date").toString()
+                        val weather = today.getString("weather")
 
-                    val wind = today.getInt("wind10m_max")
+                        val temperatures = today.getJSONObject("temp2m")
 
-                    post = WeatherPost(
-                        date,
-                        weather,
-                        minTemp,
-                        maxTemp,
-                        wind)
+                        val minTemp = temperatures.getInt("min")
+                        val maxTemp = temperatures.getInt("max")
 
-                },
-                { error ->
-                    Log.e("VolleyError", error.toString())
-                }
-            )
+                        val wind = today.getInt("wind10m_max")
 
-            queue.add(request)
+                        post = WeatherPost(
+                            date,
+                            weather,
+                            minTemp,
+                            maxTemp,
+                            wind)
+
+                        Log.e("API-String", url)
+                        Log.d("Weather", response.toString())
+
+                    },
+                    { error ->
+                        Log.e("VolleyError", error.toString())
+                    }
+                )
+
+                queue.add(request)
+            }
 
             MyKotlinLabApplicationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -79,8 +101,16 @@ class MainActivity : ComponentActivity() {
                             .fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
+                        LocationSelector(
+                            locations = locations,
+                            selectedLocation = selectedLocation,
+                            onLocationSelected = { location ->
+                                selectedLocation = location
+                            }
+                        )
+
                         when (val postState = post) {
-                            null -> Text("Nothing to show!")
+                            null -> PostCardPreview()
                             else -> PostCard(postState)
                         }
                     }
