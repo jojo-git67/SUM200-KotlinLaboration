@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.mykotlinlabapplication.data.Location
 
-
+//Inspired by example in kotlin documentation @ https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-exposed-dropdown-menu-box.html
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LocationSelector(
