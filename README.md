@@ -49,6 +49,8 @@ before it is displayed.
 
 The data retrieved from the API is not user-friendly and that is why it must be translated before displaying.
 
+E.g. weather = **ts** means nothing to the user. **Thunderstorm** is more descriptive for the user.
+
 ### Example API request
 
 ```` bash
