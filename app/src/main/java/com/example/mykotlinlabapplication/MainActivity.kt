@@ -31,7 +31,8 @@ class MainActivity : ComponentActivity() {
         Location("Trollhättan", 58.2837, 12.2886),
         Location("Gothenburg", 57.7089, 11.9746),
         Location("Stockholm", 59.3293, 18.0686),
-        Location("Malmö", 55.6050, 13.0038)
+        Location("Malmö", 55.6050, 13.0038),
+        Location("New York", 40.7306, -73.9352)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
