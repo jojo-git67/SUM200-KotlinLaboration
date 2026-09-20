@@ -11,8 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mykotlinlabapplication.data.Location
+import com.example.mykotlinlabapplication.ui.theme.MyKotlinLabApplicationTheme
 
 //Inspired by example in kotlin documentation @ https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/-exposed-dropdown-menu-box.html
 @OptIn(ExperimentalMaterial3Api::class)
@@ -72,5 +74,24 @@ fun LocationSelector(
                 )
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LocationSelectorPreview() {
+    val locations = listOf(
+        Location("Trollhättan", 58.2837, 12.2886),
+        Location("Gothenburg", 57.7089, 11.9746),
+        Location("Stockholm", 59.3293, 18.0686),
+        Location("Malmö", 55.6050, 13.0038)
+    )
+
+    MyKotlinLabApplicationTheme {
+        LocationSelector(
+            locations = locations,
+            selectedLocation = locations[2],
+            onLocationSelected = {}
+        )
     }
 }
